@@ -1,0 +1,1 @@
+print("Credit Risk Platform initialized")
