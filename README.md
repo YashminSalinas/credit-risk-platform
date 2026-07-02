@@ -33,6 +33,9 @@ Future: Feature Engineering → ML Model → Credit Scoring System
 
 ---
 
+## 📁 Project Structure
+
+```
 credit-risk-platform/
 │
 ├── data/
@@ -42,33 +45,33 @@ credit-risk-platform/
 │   ├── gold/                 # analytics-ready data (future)
 │
 ├── src/
-│   ├── ingestion/            # data ingestion pipeline
+│   ├── ingestion/
 │   │   └── load_raw_data.py
 │   │
-│   ├── analytics/            # EDA + risk analysis
+│   ├── analytics/
 │   │   ├── define_target.py
 │   │   ├── eda_risk.py
 │   │   └── visual_risk.py
 │   │
-│   ├── etl/                  # transformations (future)
-│   ├── modeling/             # ML models (future)
-│   ├── monitoring/           # monitoring (future)
-│   └── common/               # shared utilities (future)
+│   ├── etl/
+│   ├── modeling/
+│   ├── monitoring/
+│   └── common/
 │
 ├── reports/
-│   └── figures/              # generated EDA visualizations
+│   └── figures/
 │
-├── logs/                     # execution logs per run
+├── logs/
 │
-├── notebooks/                # exploratory notebooks (optional)
-├── sql/                     # future analytics queries
+├── notebooks/
+├── sql/
 │
 ├── requirements.txt
 ├── main.py
 └── README.md
+```
 
 ---
-
 ## ⚙️ Pipeline Breakdown
 
 ### 🚀 Data Ingestion Layer
