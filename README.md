@@ -1,172 +1,318 @@
-# Credit Risk Analytics Platform
+# Credit Risk Platform
 
 ## 🎯 Objective
 
-This project simulates a real-world **credit risk analytics pipeline** used in financial institutions to evaluate borrower default risk.
+The goal of this project is to design and implement an end-to-end credit risk platform using engineering and analytics practices commonly adopted in the financial industry.
 
-It replicates how data flows in a risk department: from raw loan data ingestion to analytical insights and modeling preparation.
+The project covers the complete analytical workflow, from raw loan data ingestion to feature engineering and predictive modeling, following a Medallion Architecture (Bronze → Silver → Gold).
 
 ---
 
 ## 🏦 Business Problem
 
-Financial institutions must assess:
+Financial institutions must answer critical questions such as:
 
-- Probability of borrower default
-- Financial behavior patterns of applicants
-- Risk drivers behind credit decisions
+- Which borrowers are more likely to default?
+- Which financial characteristics increase credit risk?
+- How can historical loan information be transformed into predictive features?
+- How can large-scale credit data pipelines be built efficiently?
 
-This project addresses these questions using historical Lending Club loan data.
+This project addresses these questions using the **Lending Club Loan Dataset**, following engineering practices commonly found in banking environments.
 
 ---
 
 ## 🧱 End-to-End Architecture
 
 ```
-Raw Data (Lending Club)
-        ↓
-Data Ingestion Layer
-(Chunk processing + Parquet optimization)
-        ↓
-Analytical Layer
-(Target engineering + EDA)
-        ↓
-Visualization Layer
-(Risk insights + validation)
-        ↓
-Future Layer
-Feature Engineering → ML Model → Credit Scoring System
+
+Raw Data (CSV)
+↓
+Bronze Layer
+(Chunk Ingestion + Parquet)
+↓
+Silver Layer
+(Data Cleaning + Target Engineering)
+↓
+Gold Layer
+(Feature Engineering)
+↓
+Analytics Layer
+(EDA + Visualization)
+↓
+Machine Learning
+(Credit Risk Models)
+↓
+Model Monitoring
+(Coming Soon)
+
 ```
+
 ---
 
 ## 📁 Project Structure
 
 ```
+
 credit-risk-platform/
 │
 ├── data/
-│   ├── landing/              # raw files (optional future layer)
-│   ├── bronze/               # processed raw data (Parquet chunks)
-│   ├── silver/               # cleaned data (future)
-│   ├── gold/                 # analytics-ready data (future)
+│   ├── landing/
+│   ├── bronze/
+│   ├── silver/
+│   ├── gold/
+│   └── model/
 │
 ├── src/
 │   ├── ingestion/
-│   │   └── load_raw_data.py
-│   │
 │   ├── analytics/
-│   │   ├── define_target.py
-│   │   ├── eda_risk.py
-│   │   └── visual_risk.py
-│   │
-│   ├── etl/
 │   ├── modeling/
 │   ├── monitoring/
-│   └── common/
+│   ├── common/
+│   ├── config/
+│   └── etl/
 │
 ├── reports/
-│   └── figures/
-│
 ├── logs/
-│
 ├── notebooks/
 ├── sql/
 │
 ├── requirements.txt
 ├── main.py
 └── README.md
+
 ```
 
 ---
+
+## 📊 Dataset
+
+- **Source:** Lending Club Loan Dataset
+- **Records processed:** ~2.26 million loans
+- **Raw variables:** 151
+- **Storage:** CSV → Parquet
+- **Architecture:** Bronze → Silver → Gold
+
+---
+
 ## ⚙️ Pipeline Breakdown
 
-### 🚀 Data Ingestion Layer
-- Processed large-scale CSV datasets
-- Implemented chunk-based ingestion to handle memory constraints
-- Stored structured data in Parquet format (Bronze layer)
-- Ensured scalable and efficient data handling
+### 🚀 Bronze Layer (Data Ingestion)
+
+- Chunk-based ingestion for multi-million row datasets
+- Memory-efficient processing
+- CSV to Parquet conversion
+- Idempotent ingestion process
+- Centralized data loading utilities
 
 ---
 
-### 📊 Target Engineering (Credit Definition)
-- Defined binary risk target:
-  - `0 → PAGADOR (No default)`
-  - `1 → MOROSO (Default)`
-- Standardized inconsistent loan status categories
-- Built clean label for predictive modeling
+### 🧹 Silver Layer (Data Preparation)
+
+- Binary target engineering
+- Missing value reduction
+- Numeric type standardization
+- Analytical dataset preparation
 
 ---
 
-### 📈 Exploratory Data Analysis (EDA)
-Analyzed key risk variables:
+### 🏅 Gold Layer (Feature Engineering)
 
-- Credit score (FICO)
-- Interest rate
-- Annual income
-- Debt-to-income ratio (DTI)
+Business-oriented features:
 
-Identified clear risk separation between default and non-default borrowers.
+- Monthly income
+- Income-to-loan ratio
+- High DTI flag
+- High revolving utilization flag
+- FICO score buckets
 
 ---
 
-### 📉 Visualization & Data Quality Layer
-- Built robust visualization pipeline (histograms + boxplots)
-- Implemented data validation before plotting
-- Handled missing values and inconsistent types
-- Prevented visualization failures in production-like conditions
+### 📈 Analytics Layer
+
+- Data Quality Assessment
+- Exploratory Data Analysis
+- Risk Visualization
+- Business Insights
 
 ---
 
 ## 📊 Key Risk Insights
 
-- Lower FICO scores are strongly associated with default risk
-- Default borrowers show higher interest rates
-- Income levels are significantly lower in default population
-- Higher DTI indicates higher probability of default
+The analysis identified several important credit risk patterns:
+
+- Lower FICO scores are associated with higher default rates.
+- Defaulted borrowers tend to receive higher interest rates.
+- Lower annual income is correlated with increased default probability.
+- Higher Debt-to-Income (DTI) ratios indicate greater credit risk.
 
 ---
 
 ## 🛠 Tech Stack
 
-- Python (Data Engineering + Analytics)
-- Pandas (ETL & transformation)
-- Matplotlib (EDA visualization)
-- PyArrow (Parquet storage)
-- Git & GitHub (version control)
-- VSCode (development)
+### Data Engineering
+
+- Python
+- Pandas
+- PyArrow
+- Logging
+- Pathlib
+
+### Analytics
+
+- NumPy
+- Matplotlib
+
+### Machine Learning
+
+- Scikit-learn *(upcoming)*
+
+### Big Data
+
+- PySpark *(planned)*
+
+### Dev Tools
+
+- Git
+- GitHub
+- Visual Studio Code
 
 ---
 
 ## 🧠 Engineering Highlights
 
-- Chunk-based ingestion for large datasets
-- Data validation layer before visualization
-- Modular pipeline design (ingestion → analytics → visualization)
-- Production-style logging and run tracking
-- Robust handling of missing and inconsistent data
+- Medallion Architecture (Bronze → Silver → Gold)
+- Chunk-based ingestion
+- Centralized data loading
+- Modular pipeline design
+- Production-style logging
+- Memory-efficient processing
+- Robust validation pipeline
+- Analytics-ready datasets
+
+---
+
+# 🚀 Project Roadmap
+
+## ✅ Sprint 1 — Data Engineering
+
+- [x] Project structure
+- [x] Large-scale CSV ingestion
+- [x] Bronze Layer
+- [x] Chunk processing
+- [x] Parquet optimization
+- [x] Logging
+
+---
+
+## ✅ Sprint 2 — Data Analytics
+
+- [x] Data quality assessment
+- [x] Target engineering
+- [x] Exploratory Data Analysis
+- [x] Risk visualization
+
+---
+
+## ✅ Sprint 3 — Feature Engineering
+
+- [x] Silver Layer
+- [x] Gold Layer
+- [x] Business feature engineering
+
+---
+
+## ⏳ Sprint 4 — Predictive Modeling
+
+- [ ] Feature selection
+- [ ] Data leakage prevention
+- [ ] Logistic Regression
+- [ ] Random Forest
+- [ ] Model evaluation
+- [ ] Credit scoring
+
+---
+
+## ⏳ Sprint 5 — Model Explainability
+
+- [ ] Feature importance
+- [ ] SHAP explainability
+- [ ] Risk interpretation
+- [ ] Model comparison
+
+---
+
+## ⏳ Sprint 6 — Big Data Migration
+
+- [ ] PySpark fundamentals
+- [ ] Migrate ingestion pipeline to PySpark
+- [ ] Spark DataFrames
+- [ ] Spark SQL transformations
+- [ ] Distributed Feature Engineering
+- [ ] Performance benchmarking (Pandas vs Spark)
+
+---
+
+## ⏳ Sprint 7 — Pipeline Orchestration
+
+- [ ] Pipeline modularization
+- [ ] Docker
+- [ ] Airflow
+- [ ] Automated pipeline execution
+
+---
+
+## ⏳ Sprint 8 — Cloud Data Platform
+
+- [ ] AWS S3
+- [ ] AWS Glue
+- [ ] Athena
+- [ ] Cloud data lake
+- [ ] Production-ready architecture
 
 ---
 
 ## 📌 Current Status
 
-✔ Data ingestion pipeline  
-✔ Target engineering  
-✔ EDA analysis completed  
-✔ Visualization layer stabilized  
-⏳ Feature engineering (next phase)  
-⏳ Predictive modeling (credit scoring)  
+✔ Large-scale ingestion pipeline
+
+✔ Bronze Layer
+
+✔ Silver Layer
+
+✔ Gold Layer
+
+✔ Data Quality Assessment
+
+✔ Target Engineering
+
+✔ Exploratory Data Analysis
+
+✔ Risk Visualization
+
+✔ Feature Engineering
+
+⏳ Machine Learning
+
+⏳ Explainability
+
+⏳ Spark Migration
+
+⏳ Cloud Deployment
 
 ---
 
-## 🚀 Next Steps
+## 🎯 Long-Term Goals
 
-- Feature engineering (risk ratios, behavioral features)
-- Credit scoring model (logistic regression baseline)
-- Model evaluation (AUC, KS, confusion matrix)
-- Scorecard interpretability layer
+- Production-ready Credit Risk Platform
+- PySpark-based ETL
+- Machine Learning credit scoring
+- Cloud-native data platform
+- Automated orchestration
+- Model monitoring
+- Explainable AI
 
 ---
 
 ## 👩‍💻 Project Type
 
-Portfolio project simulating **credit risk analytics in a banking environment**
+This project is simulating a **real-world Credit Risk Platform** used by banking and financial institutions, combining **Data Engineering, Analytics, Machine Learning, Big Data and Cloud technologies**.
