@@ -13,3 +13,5 @@ data/silver/*
 
 data/gold/*
 !data/gold/.gitkeep
+
+logs/
