@@ -3,6 +3,8 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import logging
 from datetime import datetime
+from src.common.io_utils import load_all_accepted
+
 
 # =====================================================
 # CONFIGURACIÓN EDITABLE
@@ -37,7 +39,7 @@ def load_data():
 
     log("Cargando dataset...")
 
-    df = pd.read_parquet(BRONZE / "accepted_part_0.parquet")
+    df = load_all_accepted()
 
     df["loan_status"] = df["loan_status"].astype(str).str.lower()
 

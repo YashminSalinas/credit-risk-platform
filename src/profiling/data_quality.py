@@ -2,6 +2,7 @@ import pandas as pd
 from pathlib import Path
 import logging
 from datetime import datetime
+from src.common.io_utils import load_all_accepted
 
 BRONZE = Path("data/bronze")
 LOGS = Path("logs")
@@ -28,10 +29,12 @@ def log(msg):
 # LOAD DATA
 # -----------------------
 def load_data():
-    file_path = BRONZE / "accepted_part_0.parquet"
-    log(f"Loading data from {file_path}")
-    df = pd.read_parquet(file_path)
-    log(f"Data loaded | shape={df.shape}")
+    
+    log("Loading dataset...")
+
+    df = load_all_accepted()
+
+    log(f"Raw data shape: {df.shape}")
     return df
 
 # -----------------------
