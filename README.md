@@ -1,4 +1,4 @@
-# Credit Risk Analytics Platform (Banking Simulation Project)
+# Credit Risk Analytics Platform
 
 ## 🎯 Objective
 
@@ -21,16 +21,22 @@ This project addresses these questions using historical Lending Club loan data.
 ---
 
 ## 🧱 End-to-End Architecture
-Raw Data (Lending Club)
-↓
-Data Ingestion Layer (Chunk processing + Parquet optimization)
-↓
-Analytical Layer (Target engineering + EDA)
-↓
-Visualization Layer (Risk insights + validation)
-↓
-Future: Feature Engineering → ML Model → Credit Scoring System
 
+```
+Raw Data (Lending Club)
+        ↓
+Data Ingestion Layer
+(Chunk processing + Parquet optimization)
+        ↓
+Analytical Layer
+(Target engineering + EDA)
+        ↓
+Visualization Layer
+(Risk insights + validation)
+        ↓
+Future Layer
+Feature Engineering → ML Model → Credit Scoring System
+```
 ---
 
 ## 📁 Project Structure
