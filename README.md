@@ -1,48 +1,29 @@
-# Credit Risk Platform
+# 🚀 Credit Risk Scorecard Platform
 
 <p align="center">
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python)
-
 ![Pandas](https://img.shields.io/badge/Pandas-2.x-150458?style=for-the-badge&logo=pandas)
-
 ![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy)
-
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-F7931E?style=for-the-badge&logo=scikitlearn)
-
 ![PyArrow](https://img.shields.io/badge/PyArrow-Parquet-4B8BBE?style=for-the-badge)
-
 ![Git](https://img.shields.io/badge/Git-Version_Control-F05032?style=for-the-badge&logo=git)
-
 ![VS Code](https://img.shields.io/badge/VS_Code-IDE-007ACC?style=for-the-badge&logo=visualstudiocode)
-
-![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Production_Style-success?style=for-the-badge)
 
 </p>
 
+| Dataset | Records | Outputs | Domain |
+|---------|---------:|---------|--------|
+| Lending Club | 2.2M+ | Credit Score · PD · Risk Bands | Credit Risk |
+
+> End-to-end credit risk scorecard pipeline that transforms raw lending data
+> into explainable credit scores, Probability of Default (PD), and risk bands
+> using industry-standard credit risk modeling practices commonly adopted by financial institutions.
 ---
-
-> **Production-Style Credit Risk Scorecard Platform**
->
-> End-to-end machine learning pipeline implementing feature engineering,
-> Information Value (IV), Weight of Evidence (WOE), optimal binning,
-> probability calibration, score scaling and risk band assignment
-> following credit risk modeling practices commonly used in banking
-> and financial institutions.
-
----
-
-# 🎯 Objective
-
-This project implements an end-to-end Credit Risk Scorecard Platform inspired by analytical and engineering workflows commonly adopted in banking and financial institutions.
-
-The platform covers the complete lifecycle of a credit risk model, from raw loan data ingestion to scorecard development, probability calibration, risk segmentation, and score generation using a modular and production-oriented architecture.
-
----
-
 # 🏦 Business Problem
 
-Financial institutions need to answer questions such as:
+Financial institutions continuously face questions such as:
 
 - Which borrowers are more likely to default?
 - Which customer characteristics explain credit risk?
@@ -50,368 +31,130 @@ Financial institutions need to answer questions such as:
 - How can interpretable scorecards be developed following industry standards?
 - How can the entire modeling workflow be automated and reproduced?
 
-This project addresses these questions using the Lending Club Loan Dataset while implementing techniques commonly used in real-world credit risk modeling.
+This project addresses these challenges using the Lending Club public loan dataset and industry-standard credit risk modeling techniques.
+
+---
+## 💼 Business Value
+
+This platform provides an end-to-end, explainable, and scalable credit risk assessment workflow that extends beyond binary default prediction.
+
+### Key Business Outcomes
+
+- 📉 Reduce expected credit losses through more accurate default prediction.
+- ⚡ Accelerate loan underwriting with automated credit scoring.
+- 🎯 Improve customer segmentation using standardized risk bands.
+- 🔍 Increase model transparency with Weight of Evidence (WOE) and Information Value (IV).
+- 📊 Support regulatory-friendly and explainable credit decision processes.
+- 💰 Enable risk-based pricing strategies.
+- 📦 Scale efficiently to millions of loan records through an optimized ETL architecture.
 
 ---
 
-# 🧱 End-to-End Architecture
+## 📈 Business Impact
 
-```text
-Raw Loan Data (CSV)
-        │
-        ▼
-Bronze Layer
-(Chunk Ingestion + Parquet)
-        │
-        ▼
-Silver Layer
-(Data Cleaning + Target Engineering)
-        │
-        ▼
-Gold Layer
-(Feature Engineering)
-        │
-        ▼
-Feature Selection
-        │
-        ▼
-Optimal Binning
-        │
-        ▼
-Information Value Analysis
-        │
-        ▼
-Rare Category Grouping
-        │
-        ▼
-Monotonic WOE Transformation
-        │
-        ▼
-Correlation Filtering
-        │
-        ▼
-LogisticRegressionCV
-        │
-        ▼
-Probability Calibration
-        │
-        ▼
-Credit Score Scaling
-        │
-        ▼
-Risk Band Assignment
-        │
-        ▼
-Model Artifacts
-```
+| Business Challenge | Solution |
+|--------------------|----------|
+| Manual credit evaluation | Automated credit scoring |
+| Inconsistent lending decisions | Standardized scorecard methodology |
+| Poor portfolio segmentation | Risk bands based on Probability of Default |
+| Limited model interpretability | Fully interpretable WOE transformations |
+| Large raw datasets | Efficient ETL pipeline using Parquet |
+| Model monitoring | Population Stability Index (PSI) for drift detection |
 
 ---
 
-# 📁 Project Structure
+## ⚙️ Technical Scope
 
-```text
-credit-risk-platform/
-│
-├── data/
-│   ├── landing/
-│   ├── bronze/
-│   ├── silver/
-│   ├── gold/
-│   └── model/
-│       └── datasets/
-│
-├── reports/
-│
-├── tests/
-│
-├── src/
-│   │
-│   ├── analytics/
-│   │   ├── define_target.py
-│   │   ├── eda_risk.py
-│   │   └── visual_risk.py
-│   │
-│   ├── common/
-│   │   └── io_utils.py
-│   │
-│   ├── ingestion/
-│   │   └── load_raw_data.py
-│   │
-│   ├── modeling/
-│   │   ├── feature_engineering.py
-│   │   ├── feature_selection.py
-│   │   ├── prepare_features.py
-│   │   └── train_scorecard.py
-│   │
-│   ├── scorecard/
-│   │   ├── config.py
-│   │   ├── binning.py
-│   │   ├── woe.py
-│   │   ├── correlation.py
-│   │   ├── preprocessing.py
-│   │   ├── validation.py
-│   │   ├── training.py
-│   │   ├── evaluation.py
-│   │   ├── scoring.py
-│   │   └── artifacts.py
-│   │
-│   ├── monitoring/
-│   │
-│   └── warehouse/
-│
-├── requirements.txt
-└── README.md
-```
+The pipeline consists of the following stages:
 
----
-
-# 📊 Dataset
-
-- Dataset: Lending Club Loan Dataset
-- Original Records: ~2.26 Million Loans
-- Original Features: 151
-- Storage Format: CSV → Parquet
-- Architecture: Medallion (Bronze → Silver → Gold)
-
----
-
-# ⚙️ Pipeline Overview
-
-## 🚀 Data Ingestion
-
-- Chunk-based ingestion
-- Memory-efficient processing
-- CSV to Parquet conversion
-- Idempotent loading
-- Centralized data utilities
-
----
-
-## 🧹 Data Preparation
-
-- Target engineering
-- Missing value handling
-- Data type standardization
-- Analytical dataset generation
-
----
-
-## 🏅 Feature Engineering
-
-Business-oriented variables including:
-
-- Monthly income
-- Income-to-loan ratio
-- FICO buckets
-- High DTI flag
-- Revolving utilization flag
-- Credit behavior indicators
-- Derived financial attributes
-
----
-
-## 📊 Exploratory Analytics
-
-- Data Quality Assessment
-- Missing Value Analysis
-- Default Rate Analysis
-- Risk Visualizations
-- Business Insights
-
----
-
-# 🧠 Credit Scorecard Development
-
-The modeling pipeline implements techniques commonly adopted in financial institutions.
-
-## Feature Selection
-
+- ETL pipeline (Bronze → Silver → Gold)
+- Data cleaning and preprocessing
+- Feature engineering
 - Information Value (IV)
-- IV stability validation
-- Predictive feature filtering
-
----
-
-## Optimal Binning
-
-- Supervised binning
-- Business-oriented discretization
-- Rare category grouping
-
----
-
-## WOE Transformation
-
-- Weight of Evidence encoding
-- Monotonicity validation
-- Production-ready categorical mappings
-
----
-
-## Model Validation
-
-- Leakage prevention
-- Correlation filtering
-- Feature redundancy removal
-
----
-
-## Model Training
-
-- LogisticRegressionCV
-- Cross-validation
-- Automatic regularization tuning
-
----
-
-## Probability Calibration
-
-- CalibratedClassifierCV
-- Sigmoid calibration
-- Probability of Default estimation
-
----
-
-## Credit Scoring
-
+- Weight of Evidence (WOE)
+- Optimal binning
+- Logistic Regression
+- Probability calibration
 - Score scaling
 - Risk band assignment
-- Scorecard generation
-
----
-
-# 📈 Model Outputs
-
-The platform automatically generates:
-
-- Selected features
-- WOE mappings
-- Information Value reports
-- Feature selection reports
-- Calibrated models
-- Credit scores
-- Risk bands
-- Production-ready datasets
-
----
-
-# 📊 Key Risk Insights
-
-The analysis identifies several well-known credit risk relationships:
-
-- Lower FICO scores are associated with higher default rates.
-- Higher interest rates are correlated with increased default probability.
-- Lower income generally implies higher credit risk.
-- Higher Debt-to-Income ratios increase default likelihood.
-- Credit utilization contributes to borrower risk segmentation.
-
----
-
-# 🛠 Tech Stack
-
-## Data Engineering
-
-- Python
-- Pandas
-- NumPy
-- PyArrow
-
-### Machine Learning
-
-- Scikit-learn
-
-### Visualization
-
-- Matplotlib
-
-### Development
-
-- Git
-- GitHub
-- Visual Studio Code
-
----
-
-# ⭐ Engineering Highlights
-
-- Medallion Architecture
-- Modular Pipeline Design
-- Chunk-Based Processing
-- Memory-Efficient ETL
-- Feature Engineering Pipeline
-- Information Value Analysis
-- IV Stability Validation
-- Optimal Binning
-- Rare Category Handling
-- Monotonic WOE Transformation
-- Correlation Filtering
-- Leakage Prevention
-- LogisticRegressionCV
-- Probability Calibration
-- Credit Score Scaling
-- Automated Risk Band Assignment
-- Production-Oriented Artifacts
-
----
-
-# 📌 Current Status
-
-✅ Large-scale data ingestion
-
-✅ Medallion Architecture
-
-✅ Feature Engineering
-
-✅ Exploratory Data Analysis
-
-✅ Data Quality Assessment
-
-✅ Information Value Analysis
-
-✅ Feature Selection
-
-✅ Optimal Binning
-
-✅ WOE Encoding
-
-✅ Rare Category Grouping
-
-✅ Monotonicity Validation
-
-✅ Correlation Filtering
-
-✅ LogisticRegressionCV
-
-✅ Probability Calibration
-
-✅ Credit Score Scaling
-
-✅ Risk Band Assignment
-
-✅ Model Artifact Generation
-
-⏳ Model Monitoring
-
-⏳ Population Stability Index (PSI)
-
-⏳ Production Drift Monitoring
-
----
-
-# 🎯 Long-Term Goals
-
-- Production-ready Credit Risk Platform
-- Automated Model Monitoring
 - Population Stability Index (PSI)
-- Characteristic Stability Index (CSI)
-- Drift Detection
-- Model Governance
-- Production Deployment
 
 ---
 
-# 👩‍💻 Project Type
+## 🏗️ Architecture
 
-This repository simulates a production-style Credit Risk Scorecard Platform inspired by workflows commonly implemented in banking and financial institutions.
+```text
+Raw Loan Data
+      │
+      ▼
+ Bronze Layer
+      │
+      ▼
+ Silver Layer
+      │
+      ▼
+ Gold Layer
+      │
+      ▼
+ Feature Engineering
+      │
+      ▼
+ Scorecard Model
+      │
+      ▼
+ Model Monitoring
+      │
+      ▼
+ Business Outputs
+```
 
-The project combines **Data Engineering, Credit Risk Analytics, Feature Engineering, Statistical Modeling, Probability Calibration, and Credit Scorecard Development** using a modular and production-oriented architecture.
+---
+
+## 📊 Example Business Decision
+
+| Borrower | Probability of Default | Credit Score | Risk Band | Decision |
+|----------|------------------------|--------------|-----------|----------|
+| A | 8% | 742 | Low | Approve |
+| B | 21% | 665 | Medium | Manual Review |
+| C | 49% | 545 | High | Decline |
+
+---
+
+## 📂 Dataset
+
+- **Source:** Lending Club public loan dataset
+- **Records:** ~2.2 million loans
+- **Features:** ~150 variables
+- **Storage Format:** Parquet
+- **Domain:** Consumer Lending / Credit Risk
+
+---
+
+## 📦 Outputs
+
+- Probability of Default (PD)
+- Credit Score
+- Risk Band Classification
+- WOE Transformation Tables
+- Information Value Reports
+- Engineered Feature Dataset
+- Serialized Model Artifacts
+- Population Stability Index (PSI) Metrics
+
+---
+
+## 💡 Why This Project Matters
+
+Traditional machine learning projects often focus primarily on model training.
+
+This project extends beyond model training by reproducing the complete lifecycle of a real-world banking credit scorecard, integrating:
+
+- Data Engineering
+- Credit Risk Analytics
+- Explainable Machine Learning
+- Model Monitoring
+- Production-Oriented Architecture
+
+The result is an end-to-end credit risk platform designed to resemble workflows commonly used in financial institutions.
+
+---
