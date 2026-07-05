@@ -57,6 +57,14 @@ from .binning import (
 from .woe import iv_summary, iv_stability_check, fit_woe, apply_woe
 from .correlation import prune_correlated_features
 from .scoring import score, band
+from .metrics import (
+    evaluate_model,
+    print_metrics,
+    save_metrics,
+)
+from datetime import datetime
+
+RUN_ID = datetime.now().strftime("%Y%m%d_%H%M%S")
 
 REPORTS = Path("reports")
 REPORTS.mkdir(parents=True, exist_ok=True)
@@ -622,6 +630,22 @@ def train_scorecard(df):
             "AUC (sobre predict_proba cruda, sin calibrar):",
             roc_auc_score(y_test, prob_default_raw),
         )
+
+    # =====================================================
+    # MODEL METRICS
+    # =====================================================
+
+    metrics = evaluate_model(
+        y_true=y_test,
+        probabilities=probs
+    )
+
+    print_metrics(metrics)
+
+    save_metrics(
+        metrics,
+        REPORTS / f"model_metrics_{RUN_ID}.csv"
+    )
 
     # =====================================================
     # SCORE OUTPUT
