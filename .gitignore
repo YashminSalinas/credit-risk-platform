@@ -15,3 +15,10 @@ data/gold/*
 !data/gold/.gitkeep
 
 logs/
+
+*.pkl
+*.joblib
+
+data/model/
+
+reports/
