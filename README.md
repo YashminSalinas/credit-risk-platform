@@ -1,58 +1,115 @@
 # Credit Risk Platform
 
-## 🎯 Objective
+<p align="center">
 
-The goal of this project is to design and implement an end-to-end credit risk platform using engineering and analytics practices commonly adopted in the financial industry.
+![Python](https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python)
 
-The project covers the complete analytical workflow, from raw loan data ingestion to feature engineering and predictive modeling, following a Medallion Architecture (Bronze → Silver → Gold).
+![Pandas](https://img.shields.io/badge/Pandas-2.x-150458?style=for-the-badge&logo=pandas)
+
+![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy)
+
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-F7931E?style=for-the-badge&logo=scikitlearn)
+
+![PyArrow](https://img.shields.io/badge/PyArrow-Parquet-4B8BBE?style=for-the-badge)
+
+![Git](https://img.shields.io/badge/Git-Version_Control-F05032?style=for-the-badge&logo=git)
+
+![VS Code](https://img.shields.io/badge/VS_Code-IDE-007ACC?style=for-the-badge&logo=visualstudiocode)
+
+![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
+
+</p>
 
 ---
 
-## 🏦 Business Problem
+> **Production-Style Credit Risk Scorecard Platform**
+>
+> End-to-end machine learning pipeline implementing feature engineering,
+> Information Value (IV), Weight of Evidence (WOE), optimal binning,
+> probability calibration, score scaling and risk band assignment
+> following credit risk modeling practices commonly used in banking
+> and financial institutions.
 
-Financial institutions must answer critical questions such as:
+---
+
+# 🎯 Objective
+
+This project implements an end-to-end Credit Risk Scorecard Platform inspired by analytical and engineering workflows commonly adopted in banking and financial institutions.
+
+The platform covers the complete lifecycle of a credit risk model, from raw loan data ingestion to scorecard development, probability calibration, risk segmentation, and score generation using a modular and production-oriented architecture.
+
+---
+
+# 🏦 Business Problem
+
+Financial institutions need to answer questions such as:
 
 - Which borrowers are more likely to default?
-- Which financial characteristics increase credit risk?
-- How can historical loan information be transformed into predictive features?
-- How can large-scale credit data pipelines be built efficiently?
+- Which customer characteristics explain credit risk?
+- How can historical lending data be transformed into predictive variables?
+- How can interpretable scorecards be developed following industry standards?
+- How can the entire modeling workflow be automated and reproduced?
 
-This project addresses these questions using the **Lending Club Loan Dataset**, following engineering practices commonly found in banking environments.
+This project addresses these questions using the Lending Club Loan Dataset while implementing techniques commonly used in real-world credit risk modeling.
 
 ---
 
-## 🧱 End-to-End Architecture
+# 🧱 End-to-End Architecture
 
-```
-
-Raw Data (CSV)
-↓
+```text
+Raw Loan Data (CSV)
+        │
+        ▼
 Bronze Layer
 (Chunk Ingestion + Parquet)
-↓
+        │
+        ▼
 Silver Layer
 (Data Cleaning + Target Engineering)
-↓
+        │
+        ▼
 Gold Layer
 (Feature Engineering)
-↓
-Analytics Layer
-(EDA + Visualization)
-↓
-Machine Learning
-(Credit Risk Models)
-↓
-Model Monitoring
-(Coming Soon)
-
+        │
+        ▼
+Feature Selection
+        │
+        ▼
+Optimal Binning
+        │
+        ▼
+Information Value Analysis
+        │
+        ▼
+Rare Category Grouping
+        │
+        ▼
+Monotonic WOE Transformation
+        │
+        ▼
+Correlation Filtering
+        │
+        ▼
+LogisticRegressionCV
+        │
+        ▼
+Probability Calibration
+        │
+        ▼
+Credit Score Scaling
+        │
+        ▼
+Risk Band Assignment
+        │
+        ▼
+Model Artifacts
 ```
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
-```
-
+```text
 credit-risk-platform/
 │
 ├── data/
@@ -61,116 +118,213 @@ credit-risk-platform/
 │   ├── silver/
 │   ├── gold/
 │   └── model/
-│
-├── src/
-│   ├── ingestion/
-│   ├── analytics/
-│   ├── modeling/
-│   ├── monitoring/
-│   ├── common/
-│   ├── config/
-│   └── etl/
+│       └── datasets/
 │
 ├── reports/
-├── logs/
-├── notebooks/
-├── sql/
+│
+├── tests/
+│
+├── src/
+│   │
+│   ├── analytics/
+│   │   ├── define_target.py
+│   │   ├── eda_risk.py
+│   │   └── visual_risk.py
+│   │
+│   ├── common/
+│   │   └── io_utils.py
+│   │
+│   ├── ingestion/
+│   │   └── load_raw_data.py
+│   │
+│   ├── modeling/
+│   │   ├── feature_engineering.py
+│   │   ├── feature_selection.py
+│   │   ├── prepare_features.py
+│   │   └── train_scorecard.py
+│   │
+│   ├── scorecard/
+│   │   ├── config.py
+│   │   ├── binning.py
+│   │   ├── woe.py
+│   │   ├── correlation.py
+│   │   ├── preprocessing.py
+│   │   ├── validation.py
+│   │   ├── training.py
+│   │   ├── evaluation.py
+│   │   ├── scoring.py
+│   │   └── artifacts.py
+│   │
+│   ├── monitoring/
+│   │
+│   └── warehouse/
 │
 ├── requirements.txt
-├── main.py
 └── README.md
-
 ```
 
 ---
 
-## 📊 Dataset
+# 📊 Dataset
 
-- **Source:** Lending Club Loan Dataset
-- **Records processed:** ~2.26 million loans
-- **Raw variables:** 151
-- **Storage:** CSV → Parquet
-- **Architecture:** Bronze → Silver → Gold
+- Dataset: Lending Club Loan Dataset
+- Original Records: ~2.26 Million Loans
+- Original Features: 151
+- Storage Format: CSV → Parquet
+- Architecture: Medallion (Bronze → Silver → Gold)
 
 ---
 
-## ⚙️ Pipeline Breakdown
+# ⚙️ Pipeline Overview
 
-### 🚀 Bronze Layer (Data Ingestion)
+## 🚀 Data Ingestion
 
-- Chunk-based ingestion for multi-million row datasets
+- Chunk-based ingestion
 - Memory-efficient processing
 - CSV to Parquet conversion
-- Idempotent ingestion process
-- Centralized data loading utilities
+- Idempotent loading
+- Centralized data utilities
 
 ---
 
-### 🧹 Silver Layer (Data Preparation)
+## 🧹 Data Preparation
 
-- Binary target engineering
-- Missing value reduction
-- Numeric type standardization
-- Analytical dataset preparation
+- Target engineering
+- Missing value handling
+- Data type standardization
+- Analytical dataset generation
 
 ---
 
-### 🏅 Gold Layer (Feature Engineering)
+## 🏅 Feature Engineering
 
-Business-oriented features:
+Business-oriented variables including:
 
 - Monthly income
 - Income-to-loan ratio
+- FICO buckets
 - High DTI flag
-- High revolving utilization flag
-- FICO score buckets
+- Revolving utilization flag
+- Credit behavior indicators
+- Derived financial attributes
 
 ---
 
-### 📈 Analytics Layer
+## 📊 Exploratory Analytics
 
 - Data Quality Assessment
-- Exploratory Data Analysis
-- Risk Visualization
+- Missing Value Analysis
+- Default Rate Analysis
+- Risk Visualizations
 - Business Insights
 
 ---
 
-## 📊 Key Risk Insights
+# 🧠 Credit Scorecard Development
 
-The analysis identified several important credit risk patterns:
+The modeling pipeline implements techniques commonly adopted in financial institutions.
 
-- Lower FICO scores are associated with higher default rates.
-- Defaulted borrowers tend to receive higher interest rates.
-- Lower annual income is correlated with increased default probability.
-- Higher Debt-to-Income (DTI) ratios indicate greater credit risk.
+## Feature Selection
+
+- Information Value (IV)
+- IV stability validation
+- Predictive feature filtering
 
 ---
 
-## 🛠 Tech Stack
+## Optimal Binning
 
-### Data Engineering
+- Supervised binning
+- Business-oriented discretization
+- Rare category grouping
+
+---
+
+## WOE Transformation
+
+- Weight of Evidence encoding
+- Monotonicity validation
+- Production-ready categorical mappings
+
+---
+
+## Model Validation
+
+- Leakage prevention
+- Correlation filtering
+- Feature redundancy removal
+
+---
+
+## Model Training
+
+- LogisticRegressionCV
+- Cross-validation
+- Automatic regularization tuning
+
+---
+
+## Probability Calibration
+
+- CalibratedClassifierCV
+- Sigmoid calibration
+- Probability of Default estimation
+
+---
+
+## Credit Scoring
+
+- Score scaling
+- Risk band assignment
+- Scorecard generation
+
+---
+
+# 📈 Model Outputs
+
+The platform automatically generates:
+
+- Selected features
+- WOE mappings
+- Information Value reports
+- Feature selection reports
+- Calibrated models
+- Credit scores
+- Risk bands
+- Production-ready datasets
+
+---
+
+# 📊 Key Risk Insights
+
+The analysis identifies several well-known credit risk relationships:
+
+- Lower FICO scores are associated with higher default rates.
+- Higher interest rates are correlated with increased default probability.
+- Lower income generally implies higher credit risk.
+- Higher Debt-to-Income ratios increase default likelihood.
+- Credit utilization contributes to borrower risk segmentation.
+
+---
+
+# 🛠 Tech Stack
+
+## Data Engineering
 
 - Python
 - Pandas
-- PyArrow
-- Logging
-- Pathlib
-
-### Analytics
-
 - NumPy
-- Matplotlib
+- PyArrow
 
 ### Machine Learning
 
-- Scikit-learn *(upcoming)*
+- Scikit-learn
 
-### Big Data
+### Visualization
 
-- PySpark *(planned)*
+- Matplotlib
 
-### Dev Tools
+### Development
 
 - Git
 - GitHub
@@ -178,141 +332,86 @@ The analysis identified several important credit risk patterns:
 
 ---
 
-## 🧠 Engineering Highlights
+# ⭐ Engineering Highlights
 
-- Medallion Architecture (Bronze → Silver → Gold)
-- Chunk-based ingestion
-- Centralized data loading
-- Modular pipeline design
-- Production-style logging
-- Memory-efficient processing
-- Robust validation pipeline
-- Analytics-ready datasets
-
----
-
-# 🚀 Project Roadmap
-
-## ✅ Sprint 1 — Data Engineering
-
-- [x] Project structure
-- [x] Large-scale CSV ingestion
-- [x] Bronze Layer
-- [x] Chunk processing
-- [x] Parquet optimization
-- [x] Logging
+- Medallion Architecture
+- Modular Pipeline Design
+- Chunk-Based Processing
+- Memory-Efficient ETL
+- Feature Engineering Pipeline
+- Information Value Analysis
+- IV Stability Validation
+- Optimal Binning
+- Rare Category Handling
+- Monotonic WOE Transformation
+- Correlation Filtering
+- Leakage Prevention
+- LogisticRegressionCV
+- Probability Calibration
+- Credit Score Scaling
+- Automated Risk Band Assignment
+- Production-Oriented Artifacts
 
 ---
 
-## ✅ Sprint 2 — Data Analytics
+# 📌 Current Status
 
-- [x] Data quality assessment
-- [x] Target engineering
-- [x] Exploratory Data Analysis
-- [x] Risk visualization
+✅ Large-scale data ingestion
 
----
+✅ Medallion Architecture
 
-## ✅ Sprint 3 — Feature Engineering
+✅ Feature Engineering
 
-- [x] Silver Layer
-- [x] Gold Layer
-- [x] Business feature engineering
+✅ Exploratory Data Analysis
 
----
+✅ Data Quality Assessment
 
-## ⏳ Sprint 4 — Predictive Modeling
+✅ Information Value Analysis
 
-- [ ] Feature selection
-- [ ] Data leakage prevention
-- [ ] Logistic Regression
-- [ ] Random Forest
-- [ ] Model evaluation
-- [ ] Credit scoring
+✅ Feature Selection
 
----
+✅ Optimal Binning
 
-## ⏳ Sprint 5 — Model Explainability
+✅ WOE Encoding
 
-- [ ] Feature importance
-- [ ] SHAP explainability
-- [ ] Risk interpretation
-- [ ] Model comparison
+✅ Rare Category Grouping
 
----
+✅ Monotonicity Validation
 
-## ⏳ Sprint 6 — Big Data Migration
+✅ Correlation Filtering
 
-- [ ] PySpark fundamentals
-- [ ] Migrate ingestion pipeline to PySpark
-- [ ] Spark DataFrames
-- [ ] Spark SQL transformations
-- [ ] Distributed Feature Engineering
-- [ ] Performance benchmarking (Pandas vs Spark)
+✅ LogisticRegressionCV
+
+✅ Probability Calibration
+
+✅ Credit Score Scaling
+
+✅ Risk Band Assignment
+
+✅ Model Artifact Generation
+
+⏳ Model Monitoring
+
+⏳ Population Stability Index (PSI)
+
+⏳ Production Drift Monitoring
 
 ---
 
-## ⏳ Sprint 7 — Pipeline Orchestration
-
-- [ ] Pipeline modularization
-- [ ] Docker
-- [ ] Airflow
-- [ ] Automated pipeline execution
-
----
-
-## ⏳ Sprint 8 — Cloud Data Platform
-
-- [ ] AWS S3
-- [ ] AWS Glue
-- [ ] Athena
-- [ ] Cloud data lake
-- [ ] Production-ready architecture
-
----
-
-## 📌 Current Status
-
-✔ Large-scale ingestion pipeline
-
-✔ Bronze Layer
-
-✔ Silver Layer
-
-✔ Gold Layer
-
-✔ Data Quality Assessment
-
-✔ Target Engineering
-
-✔ Exploratory Data Analysis
-
-✔ Risk Visualization
-
-✔ Feature Engineering
-
-⏳ Machine Learning
-
-⏳ Explainability
-
-⏳ Spark Migration
-
-⏳ Cloud Deployment
-
----
-
-## 🎯 Long-Term Goals
+# 🎯 Long-Term Goals
 
 - Production-ready Credit Risk Platform
-- PySpark-based ETL
-- Machine Learning credit scoring
-- Cloud-native data platform
-- Automated orchestration
-- Model monitoring
-- Explainable AI
+- Automated Model Monitoring
+- Population Stability Index (PSI)
+- Characteristic Stability Index (CSI)
+- Drift Detection
+- Model Governance
+- Production Deployment
 
 ---
 
-## 👩‍💻 Project Type
+# 👩‍💻 Project Type
 
-This project is simulating a **real-world Credit Risk Platform** used by banking and financial institutions, combining **Data Engineering, Analytics, Machine Learning, Big Data and Cloud technologies**.
+This repository simulates a production-style Credit Risk Scorecard Platform inspired by workflows commonly implemented in banking and financial institutions.
+
+The project combines **Data Engineering, Credit Risk Analytics, Feature Engineering, Statistical Modeling, Probability Calibration, and Credit Scorecard Development** using a modular and production-oriented architecture.
