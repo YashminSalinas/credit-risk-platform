@@ -11,7 +11,7 @@ entrenamiento: `validate_schema` y `get_cv_settings` son helpers que no
 tiene sentido reusar fuera de este pipeline, y `train_scorecard` es la
 función que los orquesta a todos.
 """
-
+import warnings
 import os
 import warnings
 from pathlib import Path
@@ -71,6 +71,12 @@ REPORTS.mkdir(parents=True, exist_ok=True)
 
 MODEL_DATASETS = Path("data/model/datasets")
 MODEL_DATASETS.mkdir(parents=True, exist_ok=True)
+
+warnings.filterwarnings(
+    "ignore",
+    category=FutureWarning,
+    module="sklearn"
+)
 
 # Registro de auditoría: una entrada por cada columna descartada en
 # cualquier punto del pipeline, con el motivo puntual. Reemplaza al CSV
